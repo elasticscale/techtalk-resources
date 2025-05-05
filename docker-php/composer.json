@@ -1,0 +1,12 @@
+{
+    "name": "elasticscale/level-1-docker-exercise",
+    "description": "Level 1 Dockerization PHP App",
+    "require": {
+      "vlucas/phpdotenv": "^5.5"
+    },
+    "autoload": {
+      "psr-4": {
+        "App\\": "app/"
+      }
+    }
+  }
