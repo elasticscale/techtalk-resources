@@ -182,6 +182,18 @@ section.lead h2 {
 
 ---
 
+## Who This Talk Is For
+
+If you are:
+
+- A developer who has **deployed apps** but never owned infra
+- Someone who’s **seen AWS Console** but feels lost in IAM, VPCs, or EC2
+- Looking to add **DevOps skills** without burning out
+
+> Then you're in the right place 🎯
+
+---
+
 ## Developers Make Strong Cloud Engineers
 
 - I hope to excite you with this talk to take your first steps in AWS
@@ -258,9 +270,48 @@ Let your real-world use cases guide the direction of your learning
   ```
   AWS Console → Budgets → Create → Zero-spend budget
   ```
-- Common mistakes: Forgotten resources, leaving instances running
 
-> Jeff Bezos has two superyachts — AWS doesn't need your forgotten EC2 instance too.
+---
+
+## Simple Cost Control
+
+- Right-size tasks (CPU/memory)
+- Use Fargate Spot for non-critical workloads
+- Tag resources for cost allocation
+- Schedule scaling based on traffic patterns
+
+> Small optimizations compound over time
+
+---
+
+## Common Beginner Pitfalls in AWS
+
+❌ Leaving resources running = surprise bill  
+❌ Using root credentials in automation  
+❌ Skipping IAM roles and relying on “admin access”  
+❌ Not using budget alerts or tagging resources  
+
+> The cloud is powerful — but **also very easy to misuse**
+
+---
+
+## Essential Security Practices
+
+- **Docker**: Use non-root users, scan images
+- **ECS**: Task-specific IAM roles, no access keys
+- **Terraform**: Secure state storage, use KMS for secrets
+
+> Security isn't extra—it's fundamental at each step
+
+---
+
+## Networking Basics You Need
+
+- **VPC**: Your private AWS network
+- **Public subnet**: Has internet access
+- **Security Groups**: Firewall rules (open only needed ports)
+
+> Understanding these fundamentals prevents most common issues
 
 ---
 
@@ -299,6 +350,20 @@ We've made a simple PHP application (see repository)
 
 ---
 
+## Why Move From Docker to ECS?
+
+You’ve got a working container. Great!
+
+But to run it for real users, you'll need:
+
+- A **scalable hosting solution**
+- **Networking** that exposes it to the internet
+- **Logs and monitoring** when things go wrong
+
+> That's where ECS Fargate comes in.
+
+---
+
 ## Level 2: Deploy It to the Cloud (ECS Fargate)
 
 **Goal:** Run your container in production
@@ -323,7 +388,7 @@ We've made a simple PHP application (see repository)
 
 **Outcome:** Your app runs in production, no server management
 
-> Stuck? Use [AWS Copilot](https://aws.github.io/copilot-cli/) and see what it deploys
+> Stuck? Use [AWS Copilot](https://aws.github.io/copilot-cli/) and see how it deploys
 
 ---
 
@@ -335,6 +400,22 @@ We've made a simple PHP application (see repository)
 - Ideal for small teams or devs getting started
 - Easier than EKS/Kubernetes
 - Note - no free tier!
+
+
+---
+
+## Why Move From ECS to Terraform?
+
+Your app runs in the cloud now — nice!  
+But how do you...
+
+- Recreate it for staging or a teammate?
+- Track changes over time?
+- Avoid “ClickOps” drift?
+- Apply it again, consistently, in another region?
+
+> That’s where **Infrastructure as Code** (IaC) comes in 
+
 
 ---
 
@@ -350,43 +431,17 @@ We've made a simple PHP application (see repository)
 **Unlearn:**
 - That clicking through the AWS Console (ClickOps) is a scalable strategy
 
----
-
-## Level 3 – Terraform Snippet
-
-```hcl
-resource "aws_ecs_cluster" "this" {
-  name = "my-app-cluster"
-}
-
-resource "aws_ecs_task_definition" "app" {
-  family                = "my-app"
-  container_definitions = jsonencode([...])
-  requires_compatibilities = ["FARGATE"]
-  network_mode            = "awsvpc"
-  cpu                     = "256"
-  memory                  = "512"
-  execution_role_arn      = aws_iam_role.ecs_execution.arn
-}
-```
 
 ---
 
-## Terraform Structure
+## Level 3 – Terraform Code
 
-```
-terraform/
-├─ main.tf
-├─ variables.tf
-├─ outputs.tf
-├─ ecs.tf
-├─ network.tf
-└─ iam.tf
-```
+1. Write Terraform code to deploy:
+   1. An ECS cluster
+   2. An ECS service
+   3. A single ECS task in a public VPC subnet (with public IP)
 
-- Use modules to stay DRY
-- Keep infra state predictable
-- Use version control + comments
+> Stuck? See the repo for a starter template
 
 ---
 
@@ -405,10 +460,22 @@ These only make sense **in context**, working with a team or during an apprentic
 
 ## Realistic Next Steps
 
-- Containerize a real app (yours or OSS)
+- Containerize a real app (yours or OSS) - tip try N8n
 - Deploy manually, then automate with Terraform
 - Apply for DevOps internships or shadowing roles
-- Pair with a senior DevOps engineer if possible
+- Pair with a senior DevOps engineer
+
+---
+
+## Realistic Timeline
+
+| Level | From Tutorial to Confidence |
+|-------|---------------------------|
+| Docker | 1-2 weeks of daily use |
+| ECS Fargate | 3-4 weeks |
+| Terraform | 1-2 months |
+
+> Progress happens in small steps, not overnight
 
 ---
 
@@ -421,16 +488,37 @@ Start with Adrian Cantrill's free Tech Fundamentals Course & then with Skill Bui
  
 ---
 
-## Final Takeaway
+## Real life case-study - Worldatlas.com
 
-You don't need to know everything — but you *do* need a path.
+- Dockerized their PHP8 Symfony app
+- Performance tuning (Nginx, Varnish, Redis)
+- Autoscaling Fargate & serverless Aurora
+- 350 million requests per month
 
-Start with:
-- Docker
-- ECS Fargate
-- Terraform & open source modules
+---
 
-And then go learn the rest **by building things** in the real world.
+## Direct support?
+
+Try these [perplexity.ai](https://www.perplexity.ai/) searches:
+
+🔍 terraform ecs fargate public subnet
+🔍 aws copilot tutorial
+🔍 cloudwatch log group missing logs
+🔍 terraform output values example
+
+> Don’t memorize — learn what to search!
+
+---
+
+## Final Checklist: Your First Cloud Deployment
+
+✅ Containerize your app with Docker  
+✅ Deploy it to ECS Fargate manually  
+✅ Automate deployment with Terraform  
+✅ Protect your wallet with budget alerts  
+✅ Learn from mistakes and keep iterating
+
+> You don’t need to know everything. You just need a **path**.
 
 ---
 
