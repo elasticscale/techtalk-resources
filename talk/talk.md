@@ -428,7 +428,7 @@ You don't need to know everything — but you *do* need a path.
 Start with:
 - Docker
 - ECS Fargate
-- Terraform
+- Terraform & open source modules
 
 And then go learn the rest **by building things** in the real world.
 
