@@ -151,9 +151,8 @@ section.lead h2 {
 
 - I started as a developer — mostly PHP & Laravel  
 - Led engineering teams at startups and scaleups  
-- Now I help SaaS companies design scalable, cost-effective AWS setups  
 - Previously founder of Dataswitcher (exit in 2024)
-- Now founder of ElasticScale — AWS specialists focused on automation  
+- Now founder of ElasticScale — AWS specialists focused on SaaS companies  
   
 ---
 
@@ -217,18 +216,6 @@ If you are:
 
 ---
 
-## Infra Code vs App Code
-
-| Aspect         | Application Code       | Infrastructure Code (Terraform) |
-|----------------|------------------------|----------------------------------|
-| Local execution | Yes                    | No (only cloud)                  |
-| Feedback loop  | Immediate               | Slow (plan/apply/deploy)         |
-| Testability    | Unit/integration        | Static analysis, drift detection |
-| Cost of error  | Usually recoverable     | Can be real $$$                  |
-| Intent         | Imperative (how)        | Declarative (what)               |
-
----
-
 ## Framework: 3 Maturity Levels
 
 - **Level 1:** Containerize it (Docker)
@@ -256,6 +243,7 @@ Learning AWS can feel like drinking from a firehose.
 
 - Don't dive into VPC endpoints, NAT gateways, routing tables  
 - Until you *need* them for your app
+- Trust that you will learn all these things in level 4 and above
 
 > 🧠 Learn just-in-time, not just-in-case
 
@@ -273,23 +261,12 @@ Let your real-world use cases guide the direction of your learning
 
 ---
 
-## Simple Cost Control
-
-- Right-size tasks (CPU/memory)
-- Use Fargate Spot for non-critical workloads
-- Tag resources for cost allocation
-- Schedule scaling based on traffic patterns
-
-> Small optimizations compound over time
-
----
-
 ## Common Beginner Pitfalls in AWS
 
 ❌ Leaving resources running = surprise bill  
 ❌ Using root credentials for daily work
 ❌ Skipping IAM roles and relying on “admin access”  
-❌ Not using budget alerts or tagging resources  
+❌ Not using budget alerts
 
 > The cloud is powerful — but **also very easy to misuse**
 
@@ -297,30 +274,11 @@ Let your real-world use cases guide the direction of your learning
 
 ## Essential Security Practices
 
-- **Docker**: Use non-root users, scan images
 - **ECS**: Task-specific IAM roles, no access keys
-- **Terraform**: Use remote state storage
-- **Network**: Restrict SSH access by IP
+- **Network**: Restrict firewall rules by your IP initially
+- **Root user**: Only use the root user for your initial signin, IAM user after
 
 > Security isn't extra—it's fundamental at each step
-
----
-
-## Networking Basics You Need
-
-- **VPC**: Your private AWS network
-- **Public subnet**: Has internet access
-- **Security Groups**: Firewall rules (open only needed ports)
-
-> Understanding these fundamentals prevents most common issues
-
----
-
-## Slides + instructions
-
-You can find the slide deck + resources to get started here:
-
-![w:256 h:256](qrcode.png) 
 
 ---
 
@@ -402,7 +360,6 @@ But to run it for real users, you'll need:
 - Easier than EKS/Kubernetes
 - Note - no free tier!
 
-
 ---
 
 ## Why Move From ECS to Terraform?
@@ -425,7 +382,7 @@ But how do you...
 
 **Learn:**
 - Terraform CLI basics: `init`, `plan`, `apply`, `destroy`
-- Resource definitions: ECS, ALB, IAM, VPC
+- Resource definitions: ECS, IAM, VPC
 - Terraform state management
 
 **Unlearn:**
@@ -441,7 +398,7 @@ But how do you...
    2. An ECS service
    3. A single ECS task in a public VPC subnet (with public IP)
 
-> Stuck? See the repo for a starter template but try yourself first
+> Stuck? See the repo for a starter template (but try yourself first!)
 
 ---
 
@@ -519,6 +476,14 @@ Try these [perplexity.ai](https://www.perplexity.ai/) searches:
 ✅ Learn from mistakes and keep iterating
 
 > You don’t need to know everything. You just need a **path**.
+
+---
+
+## Slides + instructions
+
+You can find the slide deck + resources to get started here:
+
+![w:256 h:256](qrcode.png) 
 
 ---
 
