@@ -162,7 +162,7 @@ section.lead h2 {
 - **December 2018**: Started with ElasticBeanstalk thinking "how hard can it be?"
 - First deployment: *excitement* → confusion → *panic* → eventual success
 - Learned that cloud has **many moving parts**
-- Made costly mistakes (left resources running, underestimated complexity)
+- Made costly mistakes (left resources running, VPN data transfer explosion)
 - Found that step-by-step learning worked better than trying to understand everything
 - Now: Comfortable designing complex infrastructure, but still learning daily
 
@@ -213,7 +213,7 @@ If you are:
 - Errors can cost money
 - Most tutorials skip the messy stuff (networking, state, permissions)
 - Complexity layers build on other complexity layers
-- AWS also teaches you wrong things (ie. use the console in their docs)
+- AWS teaches you wrong things (ie. use the console in their docs)
 
 ---
 
@@ -265,7 +265,7 @@ Let your real-world use cases guide the direction of your learning
 
 ## Protect Your Wallet First
 
-- Create a free tier AWS account
+- Create a free AWS account
 - **Important:** Set up a $0 budget alert immediately
   ```
   AWS Console → Budgets → Create → Zero-spend budget
@@ -287,7 +287,7 @@ Let your real-world use cases guide the direction of your learning
 ## Common Beginner Pitfalls in AWS
 
 ❌ Leaving resources running = surprise bill  
-❌ Using root credentials in automation  
+❌ Using root credentials for daily work
 ❌ Skipping IAM roles and relying on “admin access”  
 ❌ Not using budget alerts or tagging resources  
 
@@ -299,7 +299,8 @@ Let your real-world use cases guide the direction of your learning
 
 - **Docker**: Use non-root users, scan images
 - **ECS**: Task-specific IAM roles, no access keys
-- **Terraform**: Secure state storage, use KMS for secrets
+- **Terraform**: Use remote state storage
+- **Network**: Restrict SSH access by IP
 
 > Security isn't extra—it's fundamental at each step
 
@@ -395,7 +396,7 @@ But to run it for real users, you'll need:
 ## Why ECS Fargate?
 
 - Abstracts away EC2
-- No nodes, no patching
+- No nodes, no patching hosts
 - Pay-per-task
 - Ideal for small teams or devs getting started
 - Easier than EKS/Kubernetes
@@ -416,7 +417,6 @@ But how do you...
 
 > That’s where **Infrastructure as Code** (IaC) comes in 
 
-
 ---
 
 ## Level 3: Automate It with Terraform
@@ -426,7 +426,7 @@ But how do you...
 **Learn:**
 - Terraform CLI basics: `init`, `plan`, `apply`, `destroy`
 - Resource definitions: ECS, ALB, IAM, VPC
-- Terraform state management (local or remote)
+- Terraform state management
 
 **Unlearn:**
 - That clicking through the AWS Console (ClickOps) is a scalable strategy
@@ -441,7 +441,7 @@ But how do you...
    2. An ECS service
    3. A single ECS task in a public VPC subnet (with public IP)
 
-> Stuck? See the repo for a starter template
+> Stuck? See the repo for a starter template but try yourself first
 
 ---
 
@@ -452,7 +452,7 @@ But how do you...
 - Metrics & logs (CloudWatch, Datadog)
 - Advanced IAAC automation (Terragrunt) or different tools (CloudFormation)
 - Security (WAF, IAM boundaries, secrets management)
-- Team-specific architecture (EKS, S3 pipelines, Kafka)
+- Team-specific architecture (EKS, Kafka)
 
 These only make sense **in context**, working with a team or during an apprenticeship
 
@@ -460,7 +460,7 @@ These only make sense **in context**, working with a team or during an apprentic
 
 ## Realistic Next Steps
 
-- Containerize a real app (yours or OSS) - tip try N8n
+- Containerize a real app (yours or opensource) - tip try N8n
 - Deploy manually, then automate with Terraform
 - Apply for DevOps internships or shadowing roles
 - Pair with a senior DevOps engineer
@@ -491,7 +491,7 @@ Start with Adrian Cantrill's free Tech Fundamentals Course & then with Skill Bui
 ## Real life case-study - Worldatlas.com
 
 - Dockerized their PHP8 Symfony app
-- Performance tuning (Nginx, Varnish, Redis)
+- Performance tuning (Nginx, PHP-FPM, Varnish, Redis)
 - Autoscaling Fargate & serverless Aurora
 - 350 million requests per month
 
