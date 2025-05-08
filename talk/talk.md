@@ -526,6 +526,9 @@ Try these [perplexity.ai](https://www.perplexity.ai/) searches:
 
 If you're curious about DevOps or cloud and want to take your **first real steps**, I'm happy to help.
 
-Just reach out — even if you're unsure where to begin or when you are frustrated about your progress.
+Just reach out — even if you're unsure where to begin or when you are frustrated about your progress. 📬 **alex@elasticscale.com**
 
-📬 **alex@elasticscale.com**
+Also add me on LinkedIn for bi-weekly AWS tips:
+
+![w:164 h:164](linkedin.png) 
+
